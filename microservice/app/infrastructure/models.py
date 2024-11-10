@@ -43,7 +43,9 @@ class Category(SQLModel, table=True):
     )
 
 
-class LocationCategoryReviewed(SQLModel, table=True):
+class RecommendationReview(SQLModel, table=True):
+    __tablename__ = "location_category_reviewed"
+
     id: int = Field(default=None, primary_key=True)
     location_id: int = Field(foreign_key="location.id")
     category_id: int = Field(foreign_key="category.id")
