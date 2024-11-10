@@ -1,0 +1,86 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Docker-related files
+*.log
+*.env
+docker-compose.override.yml
+db_data/
+postgres_data/
+
+# Pytest cache and test files
+.pytest_cache/
+htmlcov/
+.tox/
+coverage/
+*.cover
+*.py,cover
+.hypothesis/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# Alembic migration files
+alembic/versions/*.pyc
+alembic/versions/*.pyo
+alembic/versions/*.py~
+alembic/versions/*.swp
+alembic.ini
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Python dependency files
+*.egg-info/
+.eggs/
+*.egg
+*.manifest
+*.spec
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# IDE / Editor configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Distribution / packaging
+.Python
+*.deb
+*.rpm
+*.tar.gz
+*.whl
+dist/
+build/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs and debug files
+*.log
+*.out
+*.err
+
+#

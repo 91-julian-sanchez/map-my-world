@@ -1,20 +1,22 @@
-# Usa una imagen base de Python
-FROM python:3.9-slim
+# pull official base image
+FROM python:3.11-slim-buster
 
-# Define el directorio de trabajo
-WORKDIR /app
+# set working directory
+WORKDIR /usr/src/app
 
-# Copia el archivo de dependencias
-COPY requirements.txt .
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Instala las dependencias
-RUN pip install --no-cache-dir -r requirements.txt
+# install system dependencies
+RUN apt-get update \
+  && apt-get -y install netcat gcc postgresql \
+  && apt-get clean
 
-# Copia el resto del código fuente
+# install python dependencies
+RUN pip install --upgrade pip
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
+# add app
 COPY . .
-
-# Expone el puerto que usará la API
-EXPOSE 8000
-
-# Comando para ejecutar la aplicación
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

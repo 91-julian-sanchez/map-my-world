@@ -1,31 +1,22 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: map_my_world_api
+
+  web:
+    build: .
+    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    volumes:
+      - ./microservice:/usr/src/app
     ports:
-      - "8000:8000"
+      - 8000:8000
+    env_file:
+      - .env
     depends_on:
       - db
-    environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/mapmyworld
-    volumes:
-      - .:/app
 
   db:
-    image: postgres:13
-    container_name: map_my_world_db
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mapmyworld
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
+    image: postgres:15.3
+    expose:
+      - 5434:5432
+    env_file:
+      - .env
