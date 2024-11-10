@@ -1,6 +1,6 @@
 from typing import List
 
-from app.infrastructure.models import RecommendationReview
+from app.infrastructure.models import Category, Location, RecommendationReview
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
@@ -22,3 +22,15 @@ class RecommendationReviewRepository:
         """Retrieves all recommendation reviews from the database."""
         result = await self.session.execute(select(RecommendationReview))
         return result.scalars().all()
+
+    async def get_combinations(self) -> List[dict]:
+        """
+        Get all combinations of Location and Category.
+        """
+        stmt = select(Location, Category)
+        results = await self.session.execute(stmt)
+        combinations = [
+            {"location_id": loc.id, "category_id": cat.id} for loc, cat in results
+        ]
+
+        return combinations

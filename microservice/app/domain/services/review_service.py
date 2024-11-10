@@ -3,11 +3,10 @@ from typing import List
 from app.infrastructure.models import RecommendationReview
 from app.infrastructure.repositories.review_repository import \
     RecommendationReviewRepository
-from sqlmodel.ext.asyncio.session import AsyncSession
 
 
 class RecommendationReviewService:
-    def __init__(self, session: AsyncSession):
+    def __init__(self, session):
         self.repository = RecommendationReviewRepository(session)
 
     async def create_recommendation_review(

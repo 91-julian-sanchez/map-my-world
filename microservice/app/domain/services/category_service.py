@@ -3,11 +3,10 @@ from typing import List
 from app.infrastructure.models import Category
 from app.infrastructure.repositories.category_repository import \
     CategoryRepository
-from sqlmodel.ext.asyncio.session import AsyncSession
 
 
 class CategoryService:
-    def __init__(self, session: AsyncSession):
+    def __init__(self, session):
         self.repository = CategoryRepository(session)
 
     async def create_Category(self, Category: Category) -> Category:
