@@ -10,7 +10,7 @@ class RecommendationRepository:
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def get_combinations_category_location(self) -> List[dict]:
+    async def get_combinations(self) -> List[dict]:
         """
         Get all combinations of Location and Category.
         """
@@ -18,6 +18,24 @@ class RecommendationRepository:
         results = await self.session.execute(stmt)
         combinations = [
             {"location_id": loc.id, "category_id": cat.id} for loc, cat in results
+        ]
+
+        return combinations
+
+    async def get_combinations_category_location(self) -> List[dict]:
+        """
+        Get all combinations of Location and Category.
+        """
+        stmt = select(Location, Category)
+        results = await self.session.execute(stmt)
+        combinations = [
+            {
+                "location_id": loc.id,
+                "location_name": loc.name,
+                "category_id": cat.id,
+                "category_name": cat.name,
+            }
+            for loc, cat in results
         ]
 
         return combinations

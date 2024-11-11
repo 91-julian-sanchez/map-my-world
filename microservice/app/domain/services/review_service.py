@@ -1,7 +1,7 @@
 from typing import List
 
 from app.infrastructure.models import RecommendationReview
-from app.infrastructure.repositories.review_repository import \
+from app.infrastructure.repositories.recommendation_review_repository import \
     RecommendationReviewRepository
 
 
