@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 from typing import Optional
 
+from sqlalchemy import UniqueConstraint  # Importa UniqueConstraint
 from sqlalchemy.sql import func
 from sqlmodel import Field, SQLModel
 
@@ -27,6 +28,12 @@ class Location(Base, table=True):
         sa_column_kwargs={"onupdate": func.now()},
     )
 
+    __table_args__ = (
+        UniqueConstraint(
+            "latitude", "longitude", name="uix_location_lat_long"
+        ),  # Restricción única
+    )
+
 
 class Category(SQLModel, table=True):
     __tablename__ = "categories"
@@ -44,13 +51,17 @@ class Category(SQLModel, table=True):
         sa_column_kwargs={"onupdate": func.now()},
     )
 
+    __table_args__ = (
+        UniqueConstraint("name", name="uix_category_name"),  # Restricción única
+    )
+
 
 class RecommendationReview(SQLModel, table=True):
     __tablename__ = "location_category_reviewed"
 
     id: int = Field(default=None, primary_key=True)
-    location_id: int = Field(foreign_key="location.id")
-    category_id: int = Field(foreign_key="category.id")
+    location_id: int = Field(foreign_key="locations.id")
+    category_id: int = Field(foreign_key="categories.id")
     reviewed_at: datetime = Field(default_factory=datetime.utcnow)
     created_at: datetime = Field(
         default_factory=lambda: datetime.now(timezone.utc)
