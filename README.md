@@ -1,47 +1,49 @@
 # API Map My World
 
-This project provides an API to manage locations, categories, and recommendations. It uses FastAPI, SQLAlchemy, and Alembic for database management, and Docker for deployment and execution.
+Este proyecto proporciona una API para gestionar ubicaciones, categorías y recomendaciones. Utiliza FastAPI, SQLAlchemy y Alembic para la gestión de la base de datos, y Docker para la ejecución y despliegue.
 
-## Prerequisites
+## Requisitos Previos
 
 - Docker
 - Docker Compose
-- Python 3.x (optional, if you prefer to run without Docker)
+- Python 3.x (opcional, si prefieres ejecutarlo sin Docker)
 
-## Installation
+## Instalación
 
-### Start the container
+### Iniciar el Contenedor
 
-To start the container and build the application, run the following command in your terminal:
+Para iniciar el contenedor y construir la aplicación, ejecuta el siguiente comando en tu terminal:
 
 ```bash
 docker-compose up -d --build
 ```
 
-This command will download the necessary images (if not already present), build the container, and run it in the background (-d).
+Este comando descargará las imágenes necesarias (si aún no están presentes), construirá el contenedor y lo ejecutará en segundo plano (-d).
 
-## Run migrations
+## Ejecutar Migraciones
 
-Once the container is running, execute the Alembic migrations to create the tables in the database:
+Una vez que el contenedor esté en ejecución, ejecuta las migraciones de Alembic para crear las tablas en la base de datos:
 
 ```bash
 docker-compose exec web alembic upgrade head
 ```
 
-This command will apply the migrations to the database and ensure it's up to date with the latest schema changes.
+Este comando aplicará las migraciones a la base de datos y asegurará que esté actualizada con los últimos cambios de esquema.
 
-## Documentation
-The interactive API documentation is available via Swagger UI. To access it, open your browser and navigate to the following URL:
+## Documentación
+La documentación interactiva de la API está disponible mediante Swagger UI. Para acceder a ella, abre tu navegador y dirígete a la siguiente URL:
 
 http://localhost:8000/docs#/
 
-Here you can view all the available endpoints, with descriptions and the ability to test them directly from the interface.
+![alt text](image.png)
 
-## Main Endpoints
-* **GET** `/locations`: Get a list of all locations.
-* **POST** `/locations`: Create a new location.
-* **GET** `/categories`: Get a list of all categories.
-* **POST** `/categories`: Create a new category.
-* **GET** `/recommendations/review`: Get the recommendations that have been reviewed.
-* **POST** `/recommendations/review`: Add a new recommendation review.
-* **GET** `/recommendations/not-reviewed`: Get combinations of recommendations that have not been reviewed.
+Aquí puedes ver todos los endpoints disponibles, con descripciones y la capacidad de probarlos directamente desde la interfaz.
+
+## Endpoints Principales
+* **GET** `/locations`: Obtener una lista de todas las ubicaciones.
+* **POST** `/locations`:  Crear una nueva ubicación.
+* **GET** `/categories`: Obtener una lista de todas las categorías.
+* **POST** `/categories`:Crear una nueva categoría.
+* **GET** `/recommendations/review`: Obtener las recomendaciones que han sido revisadas.
+* **POST** `/recommendations/review`: Agregar una nueva revisión de recomendación.
+* **GET** `/recommendations/not-reviewed`: Obtener combinaciones de recomendaciones que no han sido revisadas.
