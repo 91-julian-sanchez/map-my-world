@@ -12,23 +12,43 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 router = APIRouter()
 
 
-@router.get("/locations", response_model=List[LocationResponse])
+@router.get(
+    "/locations",
+    response_model=List[LocationResponse],
+    summary="Retrieve Locations",
+    description="Get a list of all locations.",
+    tags=["Locations"],
+)
 async def get_locations_endpoint(session: AsyncSession = Depends(get_session)):
+    """
+    Endpoint to retrieve all locations from the database.
+    - **session**: Database session dependency for accessing the database.
+    """
     try:
         return await get_locations(session)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.post("/locations")
+@router.post(
+    "/locations",
+    response_model=LocationResponse,
+    summary="Add a New Location",
+    description="Create a new location.",
+    tags=["Locations"],
+)
 async def add_location(
     location: LocationCreate, session: AsyncSession = Depends(get_session)
 ):
+    """
+    Endpoint to add a new location to the database.
+    - **location**: Data for the new location including name, latitude, and longitude.
+    - **session**: Database session dependency for accessing the database.
+    """
     try:
         location_model = Location(
             name=location.name, latitude=location.latitude, longitude=location.longitude
         )
-        location_created = await create_location(session, location_model)
-        return {"status": "ok", "location": location_created}
+        return await create_location(session, location_model)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
