@@ -10,6 +10,7 @@ class Base(SQLModel):
 
 
 class Location(Base, table=True):
+    __tablename__ = "locations"
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str = Field(index=True)
     latitude: float = Field(nullable=False)
@@ -28,6 +29,7 @@ class Location(Base, table=True):
 
 
 class Category(SQLModel, table=True):
+    __tablename__ = "categories"
     id: int = Field(default=None, primary_key=True)
     name: str
     created_at: datetime = Field(
