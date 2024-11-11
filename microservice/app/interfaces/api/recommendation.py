@@ -7,8 +7,9 @@ from app.application.get_combinations_without_review import \
 from app.application.get_recommendations_review import \
     get_recommendations_review
 from app.core.config import settings
-from app.domain.schemas.recommendation import (RecommendationReviewCreate,
-                                               RecommendationReviewResponse)
+from app.domain.schemas.recommendation import (
+    RecommendationReviewCreate, RecommendationReviewResponse,
+    RecommendationsNotReviewedResponse)
 from app.infrastructure.db import get_session
 from app.infrastructure.models import RecommendationReview
 from fastapi import APIRouter, Depends, HTTPException
@@ -44,7 +45,7 @@ async def get_recommendations_review_endpoint(
     description="Create a review for a recommendation.",
     tags=["Recommendations review"],
 )
-async def add_recommendation_review(
+async def add_recommendation_review_endpoint(
     recommendation_review: RecommendationReviewCreate,
     session: AsyncSession = Depends(get_session),
 ):
@@ -66,7 +67,7 @@ async def add_recommendation_review(
 
 @router.get(
     "/recommendations/not-reviewed",
-    response_model=List[dict],
+    response_model=List[RecommendationsNotReviewedResponse],
     summary="Get Recommendations Without Reviews",
     description="Get a list of recommendation that have not yet been reviewed.",
     tags=["Recommendations review"],

@@ -37,7 +37,7 @@ async def get_locations_endpoint(session: AsyncSession = Depends(get_session)):
     description="Create a new location.",
     tags=["Locations"],
 )
-async def add_location(
+async def add_location_endpoint(
     location: LocationCreate, session: AsyncSession = Depends(get_session)
 ):
     """

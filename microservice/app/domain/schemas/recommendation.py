@@ -18,3 +18,18 @@ class RecommendationReviewResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class Location(BaseModel):
+    id: int
+    name: str
+
+
+class Category(BaseModel):
+    id: int
+    name: str
+
+
+class RecommendationsNotReviewedResponse(BaseModel):
+    location: Location
+    category: Category

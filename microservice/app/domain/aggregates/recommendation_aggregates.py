@@ -46,7 +46,7 @@ class RecommendationAggregate:
         not_in_review = [
             combination
             for combination in combinations
-            if (combination["location_id"], combination["category_id"])
+            if (combination["location"]["id"], combination["category"]["id"])
             not in existing_combinations
         ]
 

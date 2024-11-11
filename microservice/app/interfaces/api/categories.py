@@ -37,7 +37,7 @@ async def get_categories_endpoint(session: AsyncSession = Depends(get_session)):
     description="Create and add a new category.",
     tags=["Categories"],
 )
-async def add_category(
+async def add_category_endpoint(
     category: CategoryCreate, session: AsyncSession = Depends(get_session)
 ):
     """

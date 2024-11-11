@@ -30,10 +30,14 @@ class RecommendationRepository:
         results = await self.session.execute(stmt)
         combinations = [
             {
-                "location_id": loc.id,
-                "location_name": loc.name,
-                "category_id": cat.id,
-                "category_name": cat.name,
+                "location": {
+                    "id": loc.id,
+                    "name": loc.name,
+                },
+                "category": {
+                    "id": cat.id,
+                    "name": cat.name,
+                },
             }
             for loc, cat in results
         ]
