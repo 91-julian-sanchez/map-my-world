@@ -200,3 +200,200 @@ curl --location --request GET 'http://localhost:8000/categories' \
     }
 ]'
 ```
+
+### Endpoints de Recomendaciones
+
+#### Obtener recomendaciones sin revisión
+
+Este endpoint permite obtener una lista de recomendaciones que no han sido revisadas en un período de tiempo específico.
+
+**URL**: `GET /recommendations/not-reviewed`
+
+**Parámetros de consulta**:
+
+- `days_since_last_review`: Número de días desde la última revisión (ej. 30).
+- `offset`: Desplazamiento para la paginación de los resultados.
+- `limit`: Límite de resultados a devolver.
+
+**Ejemplo de solicitud**:
+
+```bash
+curl --location --request GET 'http://localhost:8000/recommendations/not-reviewed?days_since_last_review=30&offset=0&limit=10' \
+--header 'Content-Type: application/json' \
+--data '{
+    "location_id": 1,
+    "category_id": 1
+}'
+```
+
+**Ejemplo de respuesta:**:
+
+```bash
+[
+    {
+        "location": {
+            "id": 2,
+            "name": "Museo del Prado"
+        },
+        "category": {
+            "id": 1,
+            "name": "Historical Sites"
+        }
+    },
+    {
+        "location": {
+            "id": 3,
+            "name": "Parque Güell"
+        },
+        "category": {
+            "id": 1,
+            "name": "Historical Sites"
+        }
+    },
+    {
+        "location": {
+            "id": 4,
+            "name": "Alhambra de Granada"
+        },
+        "category": {
+            "id": 1,
+            "name": "Historical Sites"
+        }
+    },
+    {
+        "location": {
+            "id": 5,
+            "name": "La Rambla"
+        },
+        "category": {
+            "id": 1,
+            "name": "Historical Sites"
+        }
+    },
+    {
+        "location": {
+            "id": 6,
+            "name": "Palacio Real de Madrid"
+        },
+        "category": {
+            "id": 1,
+            "name": "Historical Sites"
+        }
+    },
+    {
+        "location": {
+            "id": 8,
+            "name": "Casa Batlló"
+        },
+        "category": {
+            "id": 1,
+            "name": "Historical Sites"
+        }
+    },
+    {
+        "location": {
+            "id": 9,
+            "name": "Catedral de Santiago de Compostela"
+        },
+        "category": {
+            "id": 1,
+            "name": "Historical Sites"
+        }
+    },
+    {
+        "location": {
+            "id": 10,
+            "name": "Parque Nacional de los Picos de Europa"
+        },
+        "category": {
+            "id": 1,
+            "name": "Historical Sites"
+        }
+    },
+    {
+        "location": {
+            "id": 1,
+            "name": "La Sagrada Familia"
+        },
+        "category": {
+            "id": 2,
+            "name": "Museums"
+        }
+    },
+    {
+        "location": {
+            "id": 3,
+            "name": "Parque Güell"
+        },
+        "category": {
+            "id": 2,
+            "name": "Museums"
+        }
+    }
+]
+```
+
+#### Obtener recomendaciones que ya han sido revisadas.
+
+Este endpoint devuelve una lista de recomendaciones que ya han sido revisadas.
+
+**URL**: `URL: GET /recommendations/review`
+
+**Ejemplo de solicitud**:
+```bash
+curl --location 'http://localhost:8000/recommendations/review'
+```
+
+**Ejemplo de respuesta:**:
+```bash
+[
+    {
+        "id": 1,
+        "location": {
+            "id": 1,
+            "name": "La Sagrada Familia",
+            "latitude": 41.403629,
+            "longitude": 2.174355,
+            "created_at": "2024-11-11T13:16:21.571476"
+        },
+        "category": {
+            "id": 1,
+            "name": "Historical Sites",
+            "created_at": "2024-11-11T13:24:31.993070"
+        },
+        "reviewed_at": "2024-11-11T13:31:02.743502"
+    },
+    {
+        "id": 2,
+        "location": {
+            "id": 2,
+            "name": "Museo del Prado",
+            "latitude": 40.413779,
+            "longitude": -3.692127,
+            "created_at": "2024-11-11T13:16:28.215540"
+        },
+        "category": {
+            "id": 2,
+            "name": "Museums",
+            "created_at": "2024-11-11T13:24:38.513792"
+        },
+        "reviewed_at": "2024-11-11T13:31:22.667702"
+    },
+    {
+        "id": 3,
+        "location": {
+            "id": 7,
+            "name": "Plaza Mayor de Madrid",
+            "latitude": 40.415363,
+            "longitude": -3.707398,
+            "created_at": "2024-11-11T13:17:07.668630"
+        },
+        "category": {
+            "id": 1,
+            "name": "Historical Sites",
+            "created_at": "2024-11-11T13:24:31.993070"
+        },
+        "reviewed_at": "2024-11-11T13:31:49.026058"
+    }
+]
+```
