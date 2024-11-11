@@ -4,8 +4,11 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    database_url: str = os.getenv("DATABASE_URL")
     app_name: str = os.getenv("APP_NAME")
+    postgres_user: str = os.getenv("POSTGRES_USER")
+    postgres_password: str = os.getenv("POSTGRES_PASSWORD")
+    postgres_port: str = os.getenv("POSTGRES_PORT")
+    postgres_db: str = os.getenv("POSTGRES_DB")
     days_since_last_review: str = os.getenv("DAYS_SINCE_LAST_REVIEW")
 
     class Config:

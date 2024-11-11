@@ -4,12 +4,13 @@ from typing import List, Optional
 from app.application.create_review import create_recommendation_review
 from app.application.get_combinations_without_review import \
     get_combinations_without_review
-from app.config import settings
 from app.domain.schemas.recommendation import RecommendationReviewCreate
 from app.infrastructure.db import get_session
 from app.infrastructure.models import RecommendationReview
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel.ext.asyncio.session import AsyncSession
+
+from microservice.app.core.config import settings
 
 router = APIRouter()
 
