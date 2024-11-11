@@ -9,11 +9,10 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 router = APIRouter()
 
 
-@router.get("/categories", response_model=list[Category])
+@router.get("/categories")
 async def get_categories_endpoint(session: AsyncSession = Depends(get_session)):
     try:
-        categories = await get_categories(session)
-        return [Category(name=category.name) for category in categories]
+        return {"status": "ok", "categories": await get_categories(session)}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -25,6 +24,6 @@ async def add_category(
     try:
         category_model = Category(name=category.name)
         category_created = await create_category(session, category_model)
-        return {"status": "success", "category": category_created}
+        return {"status": "ok", "category": category_created}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

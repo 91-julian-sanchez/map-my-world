@@ -9,18 +9,10 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 router = APIRouter()
 
 
-@router.get("/locations", response_model=list[Location])
+@router.get("/locations")
 async def get_locations_endpoint(session: AsyncSession = Depends(get_session)):
     try:
-        locations = await get_locations(session)
-        return [
-            Location(
-                name=location.name,
-                latitude=location.latitude,
-                longitude=location.longitude,
-            )
-            for location in locations
-        ]
+        return {"status": "ok", "locations": await get_locations(session)}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -34,6 +26,6 @@ async def add_location(
             name=location.name, latitude=location.latitude, longitude=location.longitude
         )
         location_created = await create_location(session, location_model)
-        return {"status": "success", "location": location_created}
+        return {"status": "ok", "location": location_created}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

@@ -10,7 +10,7 @@ app = FastAPI()
 
 @app.get("/health")
 def read_health() -> Dict[str, str]:
-    return {"status": "Microservice run..."}
+    return {"status": "ok", "message": "Microservice is run..."}
 
 
 app.include_router(location_router)
