@@ -1,7 +1,7 @@
-from app.domain.services.location_service import LocationService
+from app.domain.services.category_service import CategoryService
 from app.infrastructure.models import Category
 
 
-async def create_location(session, category: Category):
-    service = LocationService(session)
-    return await service.create_location(category)
+async def create_category(session, category: Category):
+    service = CategoryService(session)
+    return await service.create_Category(category)

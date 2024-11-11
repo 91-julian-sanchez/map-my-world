@@ -15,4 +15,4 @@ class CategoryService:
 
     async def get_all_categories(self) -> List[Category]:
         """Retrieves all Categorys using the repository."""
-        return await self.repository.get_all_Categorys()
+        return await self.repository.get_all_categories()

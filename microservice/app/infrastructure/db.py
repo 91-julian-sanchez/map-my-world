@@ -1,10 +1,7 @@
+from app.core.constants import DATABASE_URL
 from sqlalchemy.orm import sessionmaker
 from sqlmodel import SQLModel, create_engine
 from sqlmodel.ext.asyncio.session import AsyncEngine, AsyncSession
-
-from microservice.app.core.config import settings
-
-DATABASE_URL = settings.database_url
 
 engine = AsyncEngine(create_engine(DATABASE_URL, echo=True, future=True))
 
